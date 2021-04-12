@@ -26,6 +26,10 @@ export class Task extends BaseEntity {
 
   @Field()
   @Column()
+  order: number;
+
+  @Field()
+  @Column()
   addDate: string;
 
   @ManyToOne(() => User, (user) => user.tasks, {eager: true})

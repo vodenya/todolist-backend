@@ -41,14 +41,17 @@ export class TaskService {
     user: User,
   ): Promise<Task> {
     const { todo } = createTaskInput;
+    const order = await (await this.getTasks(user)).length + 1;
 
     const task = this.taskRepository.create({
       id: uuid(),
       todo,
       checked: false,
+      order,
       addDate: new Date().toISOString(),
       user: user,
     });
+    console.log(task);
 
     delete task.user;
     return this.taskRepository.save(task);
